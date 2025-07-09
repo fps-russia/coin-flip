@@ -266,6 +266,11 @@ export default function Home() {
     }
   }
 
+  const handleWin = () => {
+    // Additional win celebration logic can go here
+    console.log("Player won! Confetti time! 🎉")
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-4">
       <div className="container mx-auto max-w-4xl">
@@ -341,7 +346,11 @@ export default function Home() {
                   ) : (
                     <div className="space-y-6">
                       <div className="flex justify-center">
-                        <CoinFlipAnimation isFlipping={isFlipping} result={flipResult} />
+                        <CoinFlipAnimation
+                          isFlipping={isFlipping}
+                          result={flipResult}
+                          onWin={gameResult === "win" ? handleWin : undefined}
+                        />
                       </div>
 
                       {gameResult && (
