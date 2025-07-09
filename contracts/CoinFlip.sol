@@ -135,7 +135,7 @@ contract CoinFlip is VRFConsumerBaseV2, Ownable {
         // Calculate payout
         if (won) {
             uint256 houseFee = (game.betAmount * HOUSE_FEE_PERCENT) / 100;
-            uint256 payout = game.betAmount + (game.betAmount - houseFee);
+            uint256 payout = (game.betAmount * 2) - houseFee; // Double the bet minus house fee
             
             // Update total fees
             s_totalFees += houseFee;
@@ -185,5 +185,13 @@ contract CoinFlip is VRFConsumerBaseV2, Ownable {
      */
     function getStats() external view returns (uint256 totalGames, uint256 totalFees) {
         return (s_totalGames, s_totalFees);
+    }
+
+    /**
+     * @dev Get the house edge percentage
+     * @return The house edge percentage (3%)
+     */
+    function getHouseEdge() external pure returns (uint256) {
+        return HOUSE_FEE_PERCENT;
     }
 }

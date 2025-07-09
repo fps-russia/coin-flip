@@ -308,6 +308,9 @@ export default function Home() {
                   <CardDescription className="text-center text-gray-400">
                     Powered by Chainlink VRF for provably fair randomness
                   </CardDescription>
+                  <div className="text-center text-sm text-gray-500 mt-2">
+                    <p>House Edge: 3% • Fair odds with Chainlink VRF</p>
+                  </div>
                 </CardHeader>
 
                 <CardContent>
@@ -394,14 +397,24 @@ export default function Home() {
 
                         <div>
                           <label className="block text-sm font-medium text-gray-400 mb-1">Bet Amount (ETH)</label>
-                          <Input
-                            type="number"
-                            value={betAmount}
-                            onChange={(e) => setBetAmount(e.target.value)}
-                            min="0.001"
-                            step="0.001"
-                            className="bg-gray-700 border-gray-600"
-                          />
+                          <div className="space-y-2">
+                            <Input
+                              type="number"
+                              value={betAmount}
+                              onChange={(e) => setBetAmount(e.target.value)}
+                              min="0.001"
+                              step="0.001"
+                              className="bg-gray-700 border-gray-600"
+                            />
+                            <div className="text-sm text-gray-400 flex justify-between">
+                              <span>To Win:</span>
+                              <span className="text-green-400 font-medium">
+                                {betAmount && !isNaN(Number.parseFloat(betAmount))
+                                  ? `${(Number.parseFloat(betAmount) * 1.97).toFixed(4)} ETH`
+                                  : "0.0000 ETH"}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
